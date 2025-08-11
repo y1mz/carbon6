@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from "next-themes"
 
-function ThemeProvider({ children }) {
+function ThemesProvider({ children }) {
     return (
         <ThemeProvider
             attribute="class"
@@ -14,4 +14,4 @@ function ThemeProvider({ children }) {
     )
 }
 
-export default ThemeProvider
+export default ThemesProvider

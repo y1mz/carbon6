@@ -1,6 +1,25 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FiraMono";
+  src: url("/fonts/FiraMono.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PTSerif";
+  src: url("/fonts/PTSerif.ttf");
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -11,7 +30,7 @@
   --popover: #ffffff;
   --popover-foreground: #0a0a0a;
   --primary: #b99a80;
-  --primary-foreground: #fafafa;
+  --primary-foreground: #f4e9db;
   --secondary: #6b705c;
   --secondary-foreground: #fdfcf5;
   --muted: #f5f5f5;
@@ -36,9 +55,9 @@
   --sidebar-accent-foreground: #171717;
   --sidebar-border: #e5e5e5;
   --sidebar-ring: #a1a1a1;
-  --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: PT Serif, ui-serif, serif;
-  --font-mono: Fira Mono, ui-monospace, monospace;
+  --font-sans: "Inter", ui-sans-serif, sans-serif, system-ui;
+  --font-serif: "PTSerif" serif;
+  --font-mono: "FiraMono", ui-monospace, monospace;
   --radius: 1rem;
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
