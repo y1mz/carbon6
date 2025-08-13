@@ -5,7 +5,7 @@ import { ChevronDown, Linkedin, Instagram, Twitter, Github, Mail, MessageCircle 
 
 function HomeHeroSection({ conf, socials, images }) {
     return (
-        <section className="w-full h-[100vh] relative flex flex-col justify-center gap-2">
+        <section className="w-full h-[90vh] relative flex flex-col justify-center gap-2">
             <div>
                 <p className="text-2xl text-primary md:text-4xl lg:text-6xl">Hi there 👋</p>
                 <h1 className="font-mono text-secondary text-4xl md:text-6xl lg:text-8xl">I'm Batuhan!</h1>
@@ -30,7 +30,7 @@ function HomeHeroSection({ conf, socials, images }) {
                     <Instagram className="h-5 w-5 md:h-7 md:w-7 group-hover:text-accent" />
                 </button>
             </div>
-            <div className="absolute inset-x-0 bottom-10 flex justify-center">
+            <div className="absolute inset-x-0 bottom-16 flex justify-center">
                 <button 
                     className="transition-all animate-bounce duration-300 rounded-full"
                 >

@@ -25,7 +25,7 @@
 :root {
   --background: #fdfcf5;
   --foreground: #0a0a0a;
-  --card: #ffffff;
+  --card: #EAE4D9;
   --card-foreground: #0a0a0a;
   --popover: #ffffff;
   --popover-foreground: #0a0a0a;
@@ -74,7 +74,7 @@
 .dark {
   --background: #1e2021;
   --foreground: #f0f0e0;
-  --card: #171717;
+  --card: #222526;
   --card-foreground: #fafafa;
   --popover: #262626;
   --popover-foreground: #fafafa;
