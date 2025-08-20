@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+import { ChevronRight } from "lucide-react"
+
 function HomeBlogSection({ posts }) {
 
     const PostCard = ({ post }) => {
@@ -20,16 +22,16 @@ function HomeBlogSection({ posts }) {
                 <PostCard />
                 <PostCard />
                 <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
             </div>
             <div className="w-full flex">
                 <Link href="/blog" className="ml-auto">
                     <button
-                        className="p-3 bg-secondary rounded-[1rem] -mt-2 cursor-pointer"
+                        className="p-3 bg-secondary rounded-[1rem] -mt-2 cursor-pointer flex items-center"
                     >
-                        More
+                        <p className="font-semibold">
+                            More posts
+                        </p>
+                        <ChevronRight className="h-4 w-4 ml-2 " />
                     </button>
                 </Link>
             </div>
