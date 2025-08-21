@@ -1,20 +1,20 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core"
 import { relations } from "drizzle-orm"
+import { cuid2 } from "drizzle-cuid2/sqlite"
 
 export const posts = sqliteTable("posts", {
-    id: text("id").primaryKey(),
+    id: cuid2("id").defaultRandom().primaryKey(),
     title: text("title").notNull(),
     postSlug: text("slug").notNull(),
-//    categories: many(postcategories),
     ogImage: text("og_image"),
     ogDescription: text("og_description").notNull(),
     mdContentFile: text("md_content_file").notNull(),
     isPublished: integer("is_published", {
         mode: "boolean"
-    }),
+    }).default(0),
     createdAt: integer("created_at", {
         mode: "timestamp"
-    }).notNull(),
+    }).notNull().default(new Date().toTimeString()),
     updatedAt: integer("updated_at", {
         mode: "timestamp"
     })
@@ -26,9 +26,33 @@ export const posts = sqliteTable("posts", {
 export const postcategories = sqliteTable("post_categories", {
     id: integer("id").primaryKey({ autoIncrement: true }),
     slug: text("text").notNull(),
-    categoryTitle: text("title").notNull(),
+    categoryTitle: text("title").notNull().unique()
 //    posts: many(posts)
 })
+
+export const postToCategories = sqliteTable("posts_to_categories", ({
+    postId: text("post_id").notNull().references(() => posts.id),
+    categoryId: integer("category_id").notNull().references(() => postcategories.id)
+}))
+
+export const postRelations = relations(posts, ({ many }) => ({
+    postToCategories: many(postToCategories),
+    comments: many(postComments)
+}))
+
+export const postComments = sqliteTable("post_comments", {
+    id: cuid2("id").defaultRandom().primaryKey(),
+    postId: text("post_id").notNull().references(() => posts.id),
+    commentContents: text("comment_contents").notNull(),
+    commentSource: text("comment_source", { enum: ["twitter", "fediverse"] }).notNull(),
+    commentId: text("comment_uuid"),
+    commentUrl: text("comment_url").notNull(),
+    date: integer("date", { mode: "timestamp" })
+})
+
+export const commentsRelations = relations(postComments, ({ one }) => ({
+    post: one(posts)
+}))
 
 export const pages = sqliteTable("pages", {
     id: integer("id").primaryKey({ autoIncrement: true }),
@@ -45,7 +69,7 @@ export const pages = sqliteTable("pages", {
 })
 
 export const subpages = sqliteTable("sub_pages", {
-    id: text("id").primaryKey(),
+    id: cuid2("id").defaultRandom().primaryKey(),
     parentPageId: integer("parent_page_id").notNull().references(() => pages.id, { onDelete: "cascade" }),
     title: text("title").notNull(),
     description: text("description"),
@@ -57,8 +81,16 @@ export const subpages = sqliteTable("sub_pages", {
     })
 })
 
+export const pageRelations = relations(pages, ({ many }) => ({
+    subpages: many(subpages)
+}))
+
+export const subPageRelations = relations(subpages, ({ one }) => ({
+    parent: one(pages)
+}))
+
 export const projects = sqliteTable("projects", {
-    id: text("id").primaryKey(),
+    id: cuid2("id").defaultRandom().primaryKey(),
     title: text("title").notNull(),
     description: text("description"),
     projectLogo: text("project_logo_url"),
@@ -68,7 +100,3 @@ export const projects = sqliteTable("projects", {
 })
 
 // export const images = sqliteTable("gallery", {})
-
-// export const postcomments = sqliteTable("comments", {})
-
-// export const postvotes = sqliteTable("post_votes", {})

@@ -5,5 +5,8 @@ import { dtbs } from "../db/db"
 export const auth = betterAuth({
     database: drizzleAdapter(dtbs, {
         provider: "sqlite"
-    })
+    }),
+    emailAndPassword: {
+        enabled: true
+    }
 })
